@@ -22,24 +22,24 @@ function createUpdateSubItemClickHandler(reactComponent) {
 /*
 * REACT COMPONENTS
 **/
-window.ReactSubItem = React.createClass({displayName: 'ReactSubItem',
+window.ReactSubItem = React.createClass({displayName: "ReactSubItem",
     render: function() {
         var reactComponent = this.props.reactComponent;
         var subItem = reactComponent.props.item.prop6;
         var updateSubItemClickHandler = createUpdateSubItemClickHandler(reactComponent);
         
         return (
-            React.DOM.li(null, 
-                React.DOM.ul(null, 
-                    React.DOM.li(null, subItem.text, " ", subItem.counter),
-                    React.DOM.li(null, React.DOM.a( {href:"javascript:void(0)", onClick:updateSubItemClickHandler}, "Update"))
+            React.createElement("li", null, 
+                React.createElement("ul", null, 
+                    React.createElement("li", null, subItem.text, " ", subItem.counter), 
+                    React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: updateSubItemClickHandler}, "Update"))
                 )
             )
         );
     }
 });
 
-window.ReactItem = React.createClass({displayName: 'ReactItem',
+window.ReactItem = React.createClass({displayName: "ReactItem",
     render: function() {
         this.props.startTime = new Date().getTime();
         var item = this.props.item;
@@ -54,18 +54,18 @@ window.ReactItem = React.createClass({displayName: 'ReactItem',
         var subItem = null;
         if (item.prop6.show) {
             subItem = (
-                ReactSubItem( {reactComponent:this} )
+                React.createElement(ReactSubItem, {reactComponent: this})
             );
         }
 
         return (
-            React.DOM.ul(null, 
-                React.DOM.li(null, item.prop1),
-                React.DOM.li(null, item.prop2),
-                React.DOM.li(null, item.prop3),
-                React.DOM.li(null, item.prop4),
-                React.DOM.li( {className:"random-number"}, item.prop5),
-                React.DOM.li(null, React.DOM.a( {href:"javascript:void(0)", onClick:showSubItemClickHandler}, item.prop6.showHide, " SubItem")),
+            React.createElement("ul", null, 
+                React.createElement("li", null, item.prop1), 
+                React.createElement("li", null, item.prop2), 
+                React.createElement("li", null, item.prop3), 
+                React.createElement("li", null, item.prop4), 
+                React.createElement("li", {className: "random-number"}, item.prop5), 
+                React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: showSubItemClickHandler}, item.prop6.showHide, " SubItem")), 
                 subItem
             )
         );
@@ -77,7 +77,7 @@ window.ReactItem = React.createClass({displayName: 'ReactItem',
     }
 });
 
-window.ReactItemList = React.createClass({displayName: 'ReactItemList',
+window.ReactItemList = React.createClass({displayName: "ReactItemList",
     render: function() {
         this.props.startTime = new Date().getTime();
         var scope = this.props.scope;
@@ -85,12 +85,12 @@ window.ReactItemList = React.createClass({displayName: 'ReactItemList',
         
         var rows = _.map(items, function(item) {
             return (
-                ReactItem( {item:item, scope:scope} )
+                React.createElement(ReactItem, {item: item, scope: scope})
             );
         });
 
         return (
-            React.DOM.div(null, rows)
+            React.createElement("div", null, rows)
         );
     },
     componentDidMount: function () {

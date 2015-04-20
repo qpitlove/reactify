@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module("Reactify", [
-    "ngReact",
+    "react",
 ])
 .controller("MainCtrl", function ($scope, $timeout) {
     $scope.items = [];
@@ -12,7 +12,7 @@ angular.module("Reactify", [
     $scope.watchersCount = 0;
     $scope.isReact = false;
 
-    $scope.crateItems = function () {
+    $scope.createItems = function () {
         $scope.items = [];
         for (var i = 0; i < $scope.amount; i++) {
             $scope.items.push({
@@ -30,7 +30,7 @@ angular.module("Reactify", [
             });
         }
     }
-    $scope.crateItems();
+    $scope.createItems();
 
     function measureTime() {
         var startTimeList = new Date().getTime();
@@ -50,6 +50,10 @@ angular.module("Reactify", [
     $scope.populateReact = function () {
         $scope.showAngular = false;
         $scope.showReact = true;
+        var ReactExample = React.createFactory(ReactItemList);
+        React.render(ReactExample({
+            scope: $scope
+        }), document.getElementById('reactExample'));
     };
 
     $scope.clearItems = function () {
@@ -109,4 +113,5 @@ angular.module("Reactify", [
         item.prop6.counter++;
         reactComponent.setState({ item: item, scope: $scope });
     };
-});
+})
+.value('ReactItemList', ReactItemList);
