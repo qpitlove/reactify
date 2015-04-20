@@ -6,17 +6,21 @@
 </head>
 
 <body>
-    <script src="./scripts/angular.min.js"></script>
-    <script src="./scripts/underscore-min.js"></script>
-    <script src="./scripts/react.min.js"></script>
-    <script src="./scripts/ngReact.min.js"></script>
+    <!--<script src="./scripts/angular.min.js"></script>-->
+    <!--<script src="./scripts/underscore-min.js"></script>-->
+    <!--<script src="./scripts/react.min.js"></script>-->
+    <!--<script src="./scripts/ngReact.min.js"></script>-->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/ngReact/ngReact.js"></script>
     <script src="./scripts/reactor.js"></script>
     <script src="./app.js"></script>
 
     <div ng-app="Reactify" ng-controller="MainCtrl">
         <span>Items: </span>
         <input ng-model="amount"/>
-        <button ng-click="crateItems()" ng-disabled="amount == items.length">Set</button>
+        <button ng-click="createItems()" ng-disabled="amount == items.length">Set</button>
         <button ng-click="populateAngular()"  ng-disabled="amount != items.length">Angular</button>
         <button ng-click="populateReact()"  ng-disabled="amount != items.length">React</button>
         <button ng-click="clearItems()">Clear</button>
@@ -25,7 +29,7 @@
         <span><b>Watchers count:</b> {{watchersCount}}</span>
 
         <div ng-if="showAngular">
-            <ul ng-repeat="item in items">
+            <ul ng-repeat="item in items track by $index">
                 <li>{{item.prop1}}</li>
                 <li>{{item.prop2}}</li>
                 <li>{{item.prop3}}</li>
@@ -41,8 +45,10 @@
             </ul>
         </div>
 
-        <div ng-if="showReact">
-            <div ng-react-component="ReactItemList" data="items" ></div>
+        <!--<div ng-if="showReact">-->
+            <!--<react-component name="ReactItemList" props="items" watch-depth="reference"/>-->
+        <!--</div>-->
+        <div id="reactExample" ng-show="showReact">
         </div>
     </div>
 </body>
