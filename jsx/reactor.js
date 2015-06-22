@@ -85,7 +85,7 @@ window.ReactItemList = React.createClass({
         
         var rows = _.map(items, function(item) {
             return (
-                <ReactItem item={item} scope={scope} />
+                <ReactItem key={item.prop1} item={item} scope={scope} />
             );
         });
 
